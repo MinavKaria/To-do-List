@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import pg from "pg";
 import dotenv from "dotenv";
 import ejs from "ejs";
+import path from 'path';
 
 const { Pool } = pg;
 
@@ -38,7 +39,8 @@ createTable();
 
 let items = [];
 
-app.set("view engine", "ejs");
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
