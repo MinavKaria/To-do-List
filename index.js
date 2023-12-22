@@ -3,6 +3,8 @@ import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
 import dotenv from "dotenv";
+import ejs from "ejs";
+
 const { Pool } = pg;
 
 dotenv.config();
@@ -36,6 +38,7 @@ createTable();
 
 let items = [];
 
+app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
@@ -80,7 +83,7 @@ app.post("/add", async (req, res) =>
     }
     else
     {
-        pool.query(qry,values);
+        await pool.query(qry,values);
         res.redirect("/");
     }
 });
