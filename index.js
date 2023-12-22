@@ -22,9 +22,11 @@ const pool = new Pool({
     connectionString: process.env.POSTGRES_URL + "?sslmode=require",
 })
 
-async function createTable() {
+async function createTable() 
+{
         const qry = `
-                CREATE TABLE IF NOT EXISTS todo (
+                CREATE TABLE IF NOT EXISTS todo 
+                (
                         id SERIAL PRIMARY KEY,
                         title VARCHAR(255) NOT NULL,
                         todo_date TIMESTAMP NOT NULL
@@ -39,7 +41,7 @@ async function createTable() {
         }
 }
 
-// Call the function after establishing the connection
+
 createTable();
 
 let items = [];
@@ -62,7 +64,7 @@ app.get("/", async (req, res) => {
     console.log(items);
     res.render("index.ejs", 
     {
-        listTitle: "Today",
+        listTitle: "To-Do List",
         listItems: items,
         placeholder: "New Item",
     });
@@ -82,7 +84,7 @@ app.post("/add", async (req, res) =>
         
         res.render("index.ejs", 
         {
-            listTitle: "Today",
+            listTitle: "To-Do List",
             listItems: items,
             placeholder: "Item cannot be empty",
         });
